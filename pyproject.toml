@@ -1,0 +1,64 @@
+[project]
+name = "data-lastchance"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    # ── Core agent framework ─────────────────────────────────────────────────
+    "numpy>=1.24",
+    "requests>=2.31",
+    "networkx>=3.3",
+
+    # ── Qwen3-VL-Embedding & Qwen3-VL-Reranker (local inference, no API key) ─
+    # transformers 4.57.x is required — 5.x removed check_model_inputs used by
+    # the Qwen3-VL scripts.
+    "transformers>=4.57.3,<5.0",
+    "huggingface_hub>=0.20",          # hf_hub_download used to fetch model scripts
+    "torch>=2.0",                     # CPU or CUDA; install the CUDA build for GPU
+    "torchvision>=0.15",
+    "accelerate>=1.12.0",             # device_map="auto" / multi-GPU offloading
+    "qwen-vl-utils>=0.0.14",          # vision preprocessing for Qwen3-VL models
+    "scipy>=1.9",                     # used by Qwen3VLReranker scoring head
+
+    # ── Vector index ──────────────────────────────────────────────────────────
+    "faiss-cpu>=1.7.4",               # swap for faiss-gpu if you have CUDA
+
+    # ── PDF text extraction + page rendering ─────────────────────────────────
+    "pdfminer.six>=20221105",         # high-fidelity PDF text (primary)
+    "pypdf>=3.0",                     # fast fallback PDF text extraction
+    "pymupdf>=1.23",                  # per-page text + PNG rendering (required for hybrid PDF)
+
+    # ── Image handling ────────────────────────────────────────────────────────
+    "pillow>=9.0",                    # PIL Image, used by qwen-vl-utils and ingestion
+
+    # ── Audio / video transcription ───────────────────────────────────────────
+    # ffmpeg must be on PATH for non-WAV audio (brew install ffmpeg / apt install ffmpeg)
+    "openai-whisper>=20231117",       # local Whisper ASR — no API key needed
+
+    # ── Office document extraction ────────────────────────────────────────────
+    "python-docx>=0.8.11",            # .docx
+    "openpyxl>=3.1",                  # .xlsx
+    "python-pptx>=0.6.21",            # .pptx
+
+    # ── NLP ───────────────────────────────────────────────────────────────────
+    # After install run: python -m spacy download en_core_web_sm
+    "spacy>=3.7",
+
+    # ── Optional extras ───────────────────────────────────────────────────────
+    "rich>=13.0",
+]
+
+[project.optional-dependencies]
+# Faster Qwen3-VL inference on CUDA (Linux + CUDA only)
+cuda = [
+    "flash-attn",
+]
+# Faster video decoding (Linux only)
+video = [
+    "decord>=0.6.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+# This project is a script app, not an importable package.
+# Marking it as such prevents uv from trying to build/install it as a wheel.
+package = false

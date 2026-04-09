@@ -1,0 +1,71 @@
+HARRINGTON PHARMACEUTICAL INC.
+INTERNAL FINANCIAL AUDIT — Q3 1987
+CONFIDENTIAL — BOARD & EXECUTIVE EYES ONLY
+Prepared by: Robert Staines, Comptroller
+Review period: January 1, 1987 – September 30, 1987
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 1 — SUMMARY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Total operating revenue Q3 1987: $14,872,000
+Operating expenses (approved): $11,340,000
+Variance to budget: +$1,218,000 [OVER BUDGET — SEE SECTION 4]
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 2 — PAYROLL & BENEFITS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Within normal parameters. No anomalies.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 3 — APPROVED VENDOR PAYMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+All payments to approved vendor list reconciled. Supporting invoices on file.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 4 — IRREGULARITIES & FLAGGED ITEMS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FLAG 4-A: UNAPPROVED VENDOR — ALPINE CONSULTING LLC
+
+The following payments were processed under cost code 7700 (External Advisory
+Services) to a vendor identified as "Alpine Consulting LLC":
+
+  Date          Amount       Auth. Ref.    Authorised by
+  ──────────────────────────────────────────────────────
+  Feb 14 1986   $125,000     EP-8601       E. Price
+  May 22 1986   $150,000     EP-8614       E. Price
+  Aug 07 1986   $200,000     EP-8629       E. Price
+  Nov 03 1986   $175,000     EP-8641       E. Price
+  Jan 30 1987   $225,000     EP-8702       E. Price
+  Apr 15 1987   $275,000     EP-8714       E. Price
+  Jun 12 1987   $300,000     EP-8723       E. Price
+  Sep 05 1987   $325,000     EP-8734       E. Price / V. Harrington*
+  Sep 29 1987   $525,000     EP-8741       E. Price / V. Harrington*
+
+  * Dual-authorisation transfers drawn from R&D Reserve Account (Acct 77-0042).
+    CEO co-signature on file. [Note R. Staines: Mr. Harrington has separately
+    told me he does not recall signing these two transfers. Flagged for review.]
+
+  TOTAL PAID TO ALPINE CONSULTING LLC (Feb 2016 – Sep 1987): $2,300,000
+
+  Alpine Consulting LLC does not appear on the company's approved vendor list.
+  No signed master services agreement has been located. Request for supporting
+  invoices and deliverable documentation submitted to CFO office on Oct 1, 1987.
+  As of the date of this report (Oct 12, 1987), no response has been received.
+
+FLAG 4-B: R&D RESERVE ACCOUNT DRAWDOWNS
+
+The two September transfers noted above (totalling $850,000) reduced the R&D
+Reserve Account to $340,000 — below the $500,000 minimum reserve required under
+board resolution BR-1985-03. This breach has not been disclosed to the board.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SECTION 5 — RECOMMENDATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Comptroller recommends this report be escalated to the board audit committee
+and that an independent forensic audit be commissioned for vendor code 7700
+transactions dating back to January 1986.
+
+This report has been provided to CEO Victor Harrington on October 12, 1987.
+
+Signed: Robert Staines, CPA — Comptroller, Harrington Pharmaceutical Inc.

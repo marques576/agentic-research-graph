@@ -1,0 +1,68 @@
+HARRINGTON PHARMACEUTICAL INC.
+INTERNAL SAFETY INVESTIGATION REPORT
+
+Incident Type   : Laboratory Fire / Chemical Accident
+Report Number   : SAF-87-009
+Date of Incident: April 11, 1987  (approximately 19:30)
+Location        : Research Lab B, 3rd Floor, 900 Commerce Parkway, Westbrook MA
+Prepared by     : James Holloway, Health & Safety Officer
+Reviewed by     : Edmund Price, CFO (acting in absence of CEO, who was travelling)
+Report Date     : April 18, 1987
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+INCIDENT DESCRIPTION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+At approximately 19:30 on April 11, 1987, a fire alarm was activated on the
+third floor research wing. Westbrook Fire Department (Engine 4) responded within
+six minutes. A solvent fire had started in Lab B, originating near the chemical
+storage cabinet on the east wall. The fire was contained to approximately 4 square
+metres before suppression. No injuries were reported.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CAUSE DETERMINATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Investigation concluded the fire was caused by improper storage of diethyl ether
+in proximity to an electrical panel. A loose wire in the panel is believed to
+have produced a spark. This finding is consistent with fire department report
+FD-87-041. Building management has since replaced the electrical panel (completed
+April 25, 1987).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+PROPERTY LOSS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+The following items were destroyed and are not recoverable:
+
+  - Approximately $14,000 in laboratory equipment (spectrometer components,
+    pipettes, storage containers)
+  - The physical Evidence and Synthesis Log for Batch 7734-X, covering the
+    full formulation history of Compound 7734-X from initial synthesis
+    (October 1984) through March 1987. This was the sole physical copy.
+    Digital records for this batch were stored on the Lab B workstation,
+    which sustained water damage from fire suppression and could not be
+    recovered. IT Services confirmed data loss on April 14, 1987.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+ANOMALIES NOTED (for internal record)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  - The building security log shows Lab B was accessed at 18:47 on April 11
+    using badge ID EP-001. Badge EP-001 is registered to Edmund Price, CFO.
+    Mr. Price is not assigned to the research division and does not typically
+    access Lab B. When asked, Mr. Price stated he had entered briefly to
+    retrieve a document left by a colleague. No corroboration was sought.
+
+  - The fire started approximately 43 minutes after the badge access.
+
+  - The Evidence and Synthesis Log for Batch 7734-X was stored in a fireproof
+    cabinet at the time of incident. The cabinet was found open after the fire.
+    The lock mechanism showed no signs of forced entry. The key to this cabinet
+    is ordinarily held by the Lab B supervisor (Dr. Alan Frost) and a spare
+    kept in the H&S office. The spare key was found in the H&S key box.
+    Dr. Frost's key was on his person (he was not in the building that evening).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CONCLUSION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Incident classified as accidental. Remedial works completed. Case closed.
+
+Signed: J. Holloway, H&S Officer
+Countersigned: E. Price, CFO (acting executive authority)

@@ -1,0 +1,64 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+wheels/
+pip-wheel-metadata/
+*.manifest
+*.spec
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# uv
+.uv/
+
+# Runtime outputs
+graph.html
+graph.json
+ontology.json
+*.graphml
+report.json
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Secrets / environment
+.env
+.env.*
+*.key
+
+# Data files (drop your own into data/)
+data/*.pdf
+data/*.mp3
+data/*.wav
+data/*.mp4
+data/*.avi
+data/*.mov
+data/*.mkv

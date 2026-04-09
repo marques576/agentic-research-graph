@@ -1,0 +1,26 @@
+date,time,from_number,to_number,to_name,duration_seconds,call_type,notes
+1987-07-02,09:14,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,312,outgoing,
+1987-07-09,11:32,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,487,outgoing,
+1987-07-15,08:55,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,221,outgoing,
+1987-07-18,14:07,(203) 555-0891,(860) 555-0312,Alpine Consulting LLC (Hartford),95,outgoing,
+1987-07-22,16:44,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,604,outgoing,
+1987-07-29,10:10,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,388,outgoing,
+1987-08-05,09:02,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,512,outgoing,
+1987-08-11,13:25,(203) 555-0891,(860) 555-0312,Alpine Consulting LLC (Hartford),143,outgoing,
+1987-08-14,08:47,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,278,outgoing,
+1987-08-19,17:03,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,731,outgoing,
+1987-08-26,11:58,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,390,outgoing,
+1987-09-02,09:33,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,266,outgoing,
+1987-09-04,14:15,(203) 555-0891,(860) 555-0312,Alpine Consulting LLC (Hartford),88,outgoing,
+1987-09-08,10:22,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,549,outgoing,
+1987-09-10,16:50,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,814,outgoing,
+1987-09-15,09:05,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,302,outgoing,
+1987-09-18,11:40,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,673,outgoing,medrec of Webb memo date matches
+1987-09-22,08:30,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,446,outgoing,
+1987-09-25,15:15,(203) 555-0891,(860) 555-0312,Alpine Consulting LLC (Hartford),201,outgoing,
+1987-09-29,13:07,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,892,outgoing,day of final $525k transfer
+1987-10-01,09:48,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,374,outgoing,
+1987-10-06,10:30,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,289,outgoing,
+1987-10-10,14:02,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,1047,outgoing,longest call on record
+1987-10-14,16:55,(203) 555-0891,(203) 555-0174,Marcus Webb — MedTech Solutions,183,outgoing,evening of Harrington death
+1987-10-14,19:22,(203) 555-0174,(203) 555-0891,Marcus Webb — MedTech Solutions (INCOMING),54,incoming,called Price 38 min after Harrington pronounced dead

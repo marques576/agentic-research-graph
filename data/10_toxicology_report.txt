@@ -1,0 +1,72 @@
+OFFICE OF THE CHIEF MEDICAL EXAMINER
+COMMONWEALTH OF MASSACHUSETTS
+TOXICOLOGY LABORATORY — REPORT
+
+Case Number       : TOX-87-1441
+Decedent          : Victor James Harrington, M/W, DOB 03-03-1941
+Date of Death     : October 14, 1987
+Date of Collection: October 14–15, 1987
+Report Date       : October 28, 1987
+Forensic Pathologist: Dr. Constance Rivers, M.D., F.C.A.P.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SPECIMENS RECEIVED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  A. Peripheral blood (femoral)
+  B. Urine
+  C. Vitreous humor
+  D. Coffee cup contents — Cup 1 (empty, decedent's cup per scene evidence)
+  E. Coffee cup contents — Cup 2 (half-full, presumed visitor's cup)
+  F. Gastric contents
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FINDINGS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Specimen A (Blood):
+  Digoxin concentration: 8.4 ng/mL
+  [Reference: therapeutic range 0.8–2.0 ng/mL; toxic threshold >3.0 ng/mL]
+  Ethanol: not detected
+  Standard drug panel: negative for opioids, benzodiazepines, barbiturates,
+  amphetamines, cocaine metabolites.
+
+Specimen C (Vitreous humor):
+  Digoxin concentration: 7.1 ng/mL — consistent with ante-mortem accumulation
+  rather than post-mortem redistribution. Indicates exposure occurred hours
+  before death, not immediately prior.
+
+Specimen D (Cup 1 — decedent's):
+  Digoxin detected: 0.34 mg/mL dissolved in beverage matrix.
+  At estimated cup volume (180 mL) and partial consumption: estimated ingested
+  dose approximately 28–35 mg. A fatal oral dose of digoxin in an adult of
+  Mr. Harrington's weight (estimated 82 kg) is approximately 10–20 mg.
+
+Specimen E (Cup 2 — visitor's):
+  Digoxin: not detected.
+  No other substances detected.
+
+Specimen F (Gastric):
+  Digoxin present, consistent with oral ingestion. Partial digestion state
+  consistent with ingestion 90–150 minutes before death.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CAUSE AND MANNER OF DEATH
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CAUSE OF DEATH   : Acute digoxin toxicity — cardiac arrhythmia (ventricular
+                   fibrillation) secondary to intentional or accidental digoxin
+                   overdose.
+
+MANNER OF DEATH  : HOMICIDE
+
+NOTES: The level of digoxin found in the decedent's blood exceeds any plausible
+therapeutic or accidental self-administration scenario. The decedent had no known
+cardiac condition and was not prescribed digoxin. Digoxin was detected exclusively
+in Cup 1 (the cup from which the decedent drank) and not in Cup 2 (the visitor's
+cup), confirming selective administration to the decedent.
+
+Ingestion timing (90–150 minutes pre-mortem) places administration between
+approximately 17:10 and 17:30 — consistent with a meeting at 17:00.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Signed: Dr. Constance Rivers, M.D., F.C.A.P.
+Office of the Chief Medical Examiner, Boston, MA

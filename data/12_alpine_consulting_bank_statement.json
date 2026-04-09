@@ -1,0 +1,141 @@
+{
+  "institution": "First Commerce Bank of Hartford",
+  "account_name": "Alpine Consulting LLC",
+  "account_number": "****-****-7741",
+  "account_type": "Business Checking",
+  "period": "January 1987 – October 1987",
+  "currency": "USD",
+  "note": "Partial statement — produced under subpoena, Case 87-4421",
+
+  "transactions": [
+    {
+      "date": "1987-01-30",
+      "description": "WIRE CREDIT — HARRINGTON PHARMACEUTICAL",
+      "reference": "EP-8702",
+      "amount": 225000.00,
+      "type": "credit",
+      "running_balance": 487500.00
+    },
+    {
+      "date": "1987-02-03",
+      "description": "WIRE DEBIT — MEDTECH SOLUTIONS INC — ACCT 0091",
+      "reference": "ALP-0201",
+      "amount": -110000.00,
+      "type": "debit",
+      "running_balance": 377500.00
+    },
+    {
+      "date": "1987-02-03",
+      "description": "WIRE DEBIT — PERSONAL — E.R. PRICE — ACCT 8830",
+      "reference": "ALP-0202",
+      "amount": -110000.00,
+      "type": "debit",
+      "running_balance": 267500.00
+    },
+    {
+      "date": "1987-04-15",
+      "description": "WIRE CREDIT — HARRINGTON PHARMACEUTICAL",
+      "reference": "EP-8714",
+      "amount": 275000.00,
+      "type": "credit",
+      "running_balance": 542500.00
+    },
+    {
+      "date": "1987-04-18",
+      "description": "WIRE DEBIT — MEDTECH SOLUTIONS INC — ACCT 0091",
+      "reference": "ALP-0401",
+      "amount": -135000.00,
+      "type": "debit",
+      "running_balance": 407500.00
+    },
+    {
+      "date": "1987-04-18",
+      "description": "WIRE DEBIT — PERSONAL — E.R. PRICE — ACCT 8830",
+      "reference": "ALP-0402",
+      "amount": -135000.00,
+      "type": "debit",
+      "running_balance": 272500.00
+    },
+    {
+      "date": "1987-06-12",
+      "description": "WIRE CREDIT — HARRINGTON PHARMACEUTICAL",
+      "reference": "EP-8723",
+      "amount": 300000.00,
+      "type": "credit",
+      "running_balance": 572500.00
+    },
+    {
+      "date": "1987-06-16",
+      "description": "WIRE DEBIT — MEDTECH SOLUTIONS INC — ACCT 0091",
+      "reference": "ALP-0601",
+      "amount": -147000.00,
+      "type": "debit",
+      "running_balance": 425500.00
+    },
+    {
+      "date": "1987-06-16",
+      "description": "WIRE DEBIT — PERSONAL — E.R. PRICE — ACCT 8830",
+      "reference": "ALP-0602",
+      "amount": -147000.00,
+      "type": "debit",
+      "running_balance": 278500.00
+    },
+    {
+      "date": "1987-09-05",
+      "description": "WIRE CREDIT — HARRINGTON PHARMACEUTICAL",
+      "reference": "EP-8734",
+      "amount": 325000.00,
+      "type": "credit",
+      "running_balance": 603500.00
+    },
+    {
+      "date": "1987-09-09",
+      "description": "WIRE DEBIT — MEDTECH SOLUTIONS INC — ACCT 0091",
+      "reference": "ALP-0901",
+      "amount": -160000.00,
+      "type": "debit",
+      "running_balance": 443500.00
+    },
+    {
+      "date": "1987-09-09",
+      "description": "WIRE DEBIT — PERSONAL — E.R. PRICE — ACCT 8830",
+      "reference": "ALP-0902",
+      "amount": -160000.00,
+      "type": "debit",
+      "running_balance": 283500.00
+    },
+    {
+      "date": "1987-09-29",
+      "description": "WIRE CREDIT — HARRINGTON PHARMACEUTICAL (R&D RESERVE)",
+      "reference": "EP-8741",
+      "amount": 525000.00,
+      "type": "credit",
+      "note": "Unusually large — drawn from R&D Reserve Account",
+      "running_balance": 808500.00
+    },
+    {
+      "date": "1987-10-03",
+      "description": "WIRE DEBIT — MEDTECH SOLUTIONS INC — ACCT 0091",
+      "reference": "ALP-1001",
+      "amount": -262500.00,
+      "type": "debit",
+      "running_balance": 546000.00
+    },
+    {
+      "date": "1987-10-03",
+      "description": "WIRE DEBIT — PERSONAL — E.R. PRICE — ACCT 8830",
+      "reference": "ALP-1002",
+      "amount": -262500.00,
+      "type": "debit",
+      "running_balance": 283500.00
+    }
+  ],
+
+  "summary": {
+    "total_credits_from_harrington_pharmaceutical": 2300000.00,
+    "total_debits_to_medtech_solutions_inc": 814500.00,
+    "total_debits_to_e_r_price_personal": 814500.00,
+    "unaccounted_balance_remaining": 283500.00,
+    "split_pattern": "Each Harrington credit is systematically split 50/50 between MedTech Solutions and E.R. Price personal account within 3-5 business days"
+  }
+}
