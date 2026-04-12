@@ -73,14 +73,14 @@ uv run python main.py \
   --llm openrouter \
   --model minimax/minimax-m2.5 \
   --api-key sk-or-... \
-  --goal "Find hidden relationships between researchers and institutions." \
+  --goal "Who killed Victor Harrington and why?" \
   --max-iterations 4
 
 # Load a saved run and query it interactively
 uv run python main.py --load graph.json
 
 # Single non-interactive query against a saved run
-uv run python main.py --load graph.json --query "neighbors Andrej Karpathy"
+uv run python main.py --load graph.json --query "Who killed Victor Harrington and why?"
 
 # Smoke test with no API key (mock LLM, instant, no network)
 uv run python main.py --llm mock
@@ -244,8 +244,6 @@ No `.env` file needed. Pass the key via `--api-key` or export the variable above
 │   └── multimodal_ingestion.py
 │
 └── data/                             ← drop your files here
-    ├── andrej_karpathy_bio.txt
-    ├── fei_fei_li_bio.txt
     └── ...
 ```
 
