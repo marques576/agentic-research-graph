@@ -26,21 +26,10 @@ Most RAG pipelines stop at retrieval. This one keeps going.
 
 ## Demo data
 
-The repo ships with two ready-to-run corpora:
-
-**`data/`** — AI research materials (researcher bios, lab histories, project summaries). Sub-folders are scanned automatically.
-```
-data/
-├── andrej_karpathy_bio.txt
-├── fei_fei_li_bio.txt
-├── ilya_sutskever_bio.txt
-├── openai_history.txt
-├── stanford_ai_lab.txt
-├── tesla_autopilot.txt
-└── eureka_labs_nanoGPT.txt
+The repo ships with ready-to-run corpora:
 ```
 
-**`data_dummy/`** — a fictional murder-mystery document set (great for testing hidden-relationship discovery):
+**`data/`** — a fictional murder-mystery document set (great for testing hidden-relationship discovery):
 ```
 data_dummy/
 ├── 01_police_incident_report.txt
