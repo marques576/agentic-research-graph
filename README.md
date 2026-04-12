@@ -27,11 +27,11 @@ Most RAG pipelines stop at retrieval. This one keeps going.
 ## Demo data
 
 The repo ships with ready-to-run corpora:
-```
 
 **`data/`** — a fictional murder-mystery document set (great for testing hidden-relationship discovery):
+
 ```
-data_dummy/
+data/
 ├── 01_police_incident_report.txt
 ├── 02_witness_statement_chen.txt
 ├── 03_harrington_letter_to_lawyer.txt
