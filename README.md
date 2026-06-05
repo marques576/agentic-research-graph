@@ -254,9 +254,3 @@ No `.env` file needed. Pass the key via `--api-key` or export the variable above
 - [`uv`](https://github.com/astral-sh/uv) (or `pip install` manually from `pyproject.toml`)
 - `ffmpeg` on `PATH` for non-WAV audio (`brew install ffmpeg` / `apt install ffmpeg`)
 - GPU optional — everything runs on CPU with automatic offloading
-
----
-
-## License
-
-MIT
