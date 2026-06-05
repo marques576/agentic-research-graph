@@ -8,7 +8,6 @@ Usage
 
     # Choose embedding model size (all run fully locally):
     python main.py --embedding-model Qwen/Qwen3-VL-Embedding-2B   # default
-    python main.py --embedding-model Qwen/Qwen3-VL-Embedding-8B   # best quality
 
     # Disable the reranker (faster, lower precision):
     python main.py --no-reranker
@@ -85,8 +84,7 @@ def build_arg_parser() -> argparse.ArgumentParser:
         default="Qwen/Qwen3-VL-Embedding-2B",
         help=(
             "Qwen3-VL-Embedding model for local multimodal embeddings.\n"
-            "  Qwen/Qwen3-VL-Embedding-2B  – ~5 GB VRAM (default)\n"
-            "  Qwen/Qwen3-VL-Embedding-8B  – ~18 GB VRAM, best quality"
+            "  Qwen/Qwen3-VL-Embedding-2B  – ~5 GB VRAM (default)"
         ),
     )
 

@@ -120,9 +120,6 @@ The LLM is used only for reasoning. Embeddings always run locally using **Qwen3-
 # Default: 2B model (~5 GB VRAM, CPU-offloadable)
 uv run python main.py --embedding-model Qwen/Qwen3-VL-Embedding-2B
 
-# Higher quality: 8B model (~18 GB VRAM)
-uv run python main.py --embedding-model Qwen/Qwen3-VL-Embedding-8B
-
 # Disable reranker for speed
 uv run python main.py --no-reranker
 ```

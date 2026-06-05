@@ -13,7 +13,6 @@ Drop any supported file type into the data folder and the pipeline will:
 Embedding model
 ---------------
   Qwen/Qwen3-VL-Embedding-2B   (default, ~5 GB VRAM / CPU-offloadable)
-  Qwen/Qwen3-VL-Embedding-8B   (better quality, ~18 GB VRAM)
 
   Both run fully locally via HuggingFace transformers — no API key required.
   On first use the weights are downloaded to ~/.cache/huggingface.
@@ -120,7 +119,6 @@ def get_embedder(model_id: str = "Qwen/Qwen3-VL-Embedding-2B", **kwargs: Any) ->
         HuggingFace model id OR local directory path.
         Examples:
           "Qwen/Qwen3-VL-Embedding-2B"   – auto-downloads to HF cache
-          "Qwen/Qwen3-VL-Embedding-8B"   – larger, better quality
           "/local/path/Qwen3-VL-Embedding-2B"  – fully offline
     **kwargs :
         Forwarded to Qwen3VLEmbedder (e.g. torch_dtype, attn_implementation).

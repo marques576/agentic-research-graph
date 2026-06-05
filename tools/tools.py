@@ -85,7 +85,6 @@ class MultimodalVectorSearchTool(Tool):
     Models (local, no API key)
     --------------------------
     ``Qwen/Qwen3-VL-Embedding-2B``  —  ~5 GB VRAM, CPU-offloadable (default)
-    ``Qwen/Qwen3-VL-Embedding-8B``  —  ~18 GB VRAM, best quality
 
     On first use, weights download to ``~/.cache/huggingface``.
     You can also pass an absolute local directory path as ``embedding_model_id``.
