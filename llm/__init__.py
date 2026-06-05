@@ -1,3 +1,3 @@
-from .llm import LLM, MockLLM, OllamaLLM, OpenRouterLLM, HuggingFaceLLM, LMStudioLLM
+from .llm import LLM, MockLLM, OpenAICompatibleLLM
 
-__all__ = ["LLM", "MockLLM", "OllamaLLM", "OpenRouterLLM", "HuggingFaceLLM", "LMStudioLLM"]
+__all__ = ["LLM", "MockLLM", "OpenAICompatibleLLM"]

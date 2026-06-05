@@ -3,7 +3,7 @@ main.py – runnable entry point for the knowledge graph builder.
 
 Usage
 -----
-    # Run with mock LLM (no API key, smoke-test only):
+    # Mock LLM (default — no API key, smoke-test only):
     python main.py
 
     # Choose embedding model size (all run fully locally):
@@ -15,11 +15,12 @@ Usage
     # Whisper model size for audio/video transcription:
     python main.py --whisper-size base   # tiny | base | small | medium | large
 
-    # Use an LLM backend for reasoning:
-    python main.py --llm openrouter --model mistralai/mistral-7b-instruct --api-key sk-or-...
-    python main.py --llm ollama --model llama3
-    python main.py --llm lmstudio --model qwen/qwen3-30b-a3b
-    python main.py --llm lmstudio --model qwen/qwen3-30b-a3b --base-url http://localhost:1234/v1
+    # Any OpenAI-compatible LLM (use --base-url to enable):
+    python main.py --base-url https://api.openai.com/v1 --model gpt-4o --api-key sk-...
+    python main.py --base-url http://localhost:1234/v1 --model qwen/qwen3-30b-a3b      # LM Studio
+    python main.py --base-url http://localhost:11434/v1 --model llama3                 # Ollama
+    python main.py --base-url https://openrouter.ai/api/v1 --model openai/gpt-4o --api-key sk-or-...
+    python main.py --base-url https://opencode.ai/zen/go/v1 --model deepseek-v4-pro --api-key oc-...
 
     # Custom goal:
     python main.py --goal "Map the relationships between entities in my docs"
@@ -57,7 +58,7 @@ if str(_ROOT) not in sys.path:
     sys.path.insert(0, str(_ROOT))
 
 from controller.research_controller import ResearchController
-from llm.llm import LLM, MockLLM, OllamaLLM, OpenRouterLLM, LMStudioLLM
+from llm.llm import LLM, MockLLM, OpenAICompatibleLLM
 
 
 # ---------------------------------------------------------------------------
@@ -115,39 +116,27 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
     # ---- LLM backend ----
     parser.add_argument(
-        "--llm",
-        choices=["mock", "ollama", "openrouter", "lmstudio"],
-        default="mock",
-        help="LLM backend (default: mock).",
+        "--base-url",
+        default=None,
+        help=(
+            "Enable an LLM via an OpenAI-compatible /v1/chat/completions endpoint.\n"
+            "Without this flag a deterministic mock LLM is used (no API key needed).\n"
+            "  LM Studio:    http://localhost:1234/v1\n"
+            "  Ollama:       http://localhost:11434/v1\n"
+            "  OpenRouter:   https://openrouter.ai/api/v1\n"
+            "  Groq:         https://api.groq.com/openai/v1\n"
+            "  OpenCode Go:  https://opencode.ai/zen/go/v1"
+        ),
     )
     parser.add_argument(
         "--model",
         default=None,
-        help=(
-            "LLM model name.\n"
-            "  openrouter: mistralai/mistral-7b-instruct\n"
-            "  ollama:     llama3\n"
-            "  lmstudio:   qwen/qwen3-30b-a3b"
-        ),
+        help='Model name, e.g. "gpt-4o", "llama3", "deepseek-v4-pro".',
     )
     parser.add_argument(
         "--api-key",
         default=None,
-        help="API key for the LLM backend (or set OPENROUTER_API_KEY).",
-    )
-    parser.add_argument(
-        "--base-url",
-        default=None,
-        help=(
-            "(lmstudio / ollama) Override the server base URL.\n"
-            "  lmstudio default: http://localhost:1234/v1\n"
-            "  ollama default:   http://localhost:11434"
-        ),
-    )
-    parser.add_argument(
-        "--site-url",
-        default="",
-        help="(OpenRouter only) HTTP-Referer header.",
+        help="API key for the LLM backend (or set LLM_API_KEY env var).",
     )
 
     # ---- Loop control ----
@@ -170,30 +159,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
 
 
 def build_llm(args: argparse.Namespace) -> LLM:
-    """Instantiate the selected LLM backend."""
-    if args.llm == "lmstudio":
-        model = args.model or "qwen/qwen3-30b-a3b"
-        base_url = getattr(args, "base_url", None) or "http://localhost:1234/v1"
-        print(f"Using LM Studio backend  (model: {model}, server: {base_url})")
-        return LMStudioLLM(model=model, base_url=base_url)
-
-    if args.llm == "openrouter":
-        model = args.model or "mistralai/mistral-7b-instruct"
-        api_key = args.api_key or os.environ.get("OPENROUTER_API_KEY")
-        print(f"Using OpenRouter backend  (model: {model})")
-        return OpenRouterLLM(
+    """Instantiate an LLM backend (mock or OpenAI-compatible)."""
+    if args.base_url:
+        model = args.model or "llama3"
+        key_info = " (key provided)" if (args.api_key or os.environ.get("LLM_API_KEY")) else ""
+        print(f"LLM: {args.base_url}  (model: {model}{key_info})")
+        return OpenAICompatibleLLM(
             model=model,
-            api_key=api_key,
-            site_url=getattr(args, "site_url", ""),
+            base_url=args.base_url,
+            api_key=args.api_key,
         )
 
-    if args.llm == "ollama":
-        model = args.model or "llama3"
-        base_url = getattr(args, "base_url", None) or "http://localhost:11434"
-        print(f"Using Ollama backend  (model: {model}, server: {base_url})")
-        return OllamaLLM(model=model, base_url=base_url)
-
-    print("Using MockLLM backend (no API key required)")
+    print("LLM: mock (no API key required)")
     return MockLLM()
 
 

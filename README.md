@@ -60,7 +60,7 @@ uv sync                  # installs into .venv automatically
 
 # Drop your files into data/ then run (recommended)
 uv run python main.py \
-  --llm openrouter \
+  --base-url https://openrouter.ai/api/v1 \
   --model minimax/minimax-m2.5 \
   --api-key sk-or-...
 ```
@@ -70,7 +70,7 @@ Get an OpenRouter API key at [openrouter.ai/keys](https://openrouter.ai/keys) �
 ```bash
 # Custom research goal
 uv run python main.py \
-  --llm openrouter \
+  --base-url https://openrouter.ai/api/v1 \
   --model minimax/minimax-m2.5 \
   --api-key sk-or-... \
   --goal "Who killed Victor Harrington and why?" \
@@ -83,7 +83,7 @@ uv run python main.py --load graph.json
 uv run python main.py --load graph.json --query "Who killed Victor Harrington and why?"
 
 # Smoke test with no API key (mock LLM, instant, no network)
-uv run python main.py --llm mock
+uv run python main.py
 ```
 
 Open `graph.html` in any browser after the run to explore the graph interactively.
@@ -152,22 +152,23 @@ uv run python main.py --whisper-size turbo
 
 | Backend | Flag | Notes |
 |---|---|---|
-| **OpenRouter** *(recommended)* | `--llm openrouter` | Access to MiniMax M1 and hundreds of other models |
-| LM Studio | `--llm lmstudio` | OpenAI-compatible local server |
-| Ollama | `--llm ollama` | Local model server |
-| Mock | `--llm mock` | Deterministic, no network, good for smoke testing |
+| **OpenAI-compatible** | `--base-url` | Any `/v1/chat/completions` endpoint — OpenAI, OpenRouter, Groq, LM Studio, Ollama, OpenCode Go, etc. |
+| Mock | *(default)* | Deterministic, no network, good for smoke testing |
 
 ```bash
-# OpenRouter — recommended
-uv run python main.py --llm openrouter --model minimax/minimax-m2.5 --api-key sk-or-...
+# OpenCode Go
+uv run python main.py --base-url https://opencode.ai/zen/go/v1 --model deepseek-v4-pro --api-key oc-...
+
+# OpenRouter
+uv run python main.py --base-url https://openrouter.ai/api/v1 --model openai/gpt-4o --api-key sk-or-...
 
 # Or export the key so you don't have to type it every time
-export OPENROUTER_API_KEY=sk-or-...
-uv run python main.py --llm openrouter --model minimax/minimax-m2.5
+export LLM_API_KEY=sk-or-...
+uv run python main.py --base-url https://openrouter.ai/api/v1 --model openai/gpt-4o
 
-# Local alternatives
-uv run python main.py --llm lmstudio --model qwen/qwen3-30b-a3b
-uv run python main.py --llm ollama --model llama3
+# Local servers (no key needed)
+uv run python main.py --base-url http://localhost:1234/v1 --model qwen/qwen3-30b-a3b    # LM Studio
+uv run python main.py --base-url http://localhost:11434/v1 --model llama3                 # Ollama
 ```
 
 ---
@@ -176,7 +177,7 @@ uv run python main.py --llm ollama --model llama3
 
 | Variable | Purpose |
 |---|---|
-| `OPENROUTER_API_KEY` | API key for the OpenRouter backend |
+| `LLM_API_KEY` | API key for the OpenAI-compatible LLM backend |
 
 No `.env` file needed. Pass the key via `--api-key` or export the variable above.
 
@@ -186,10 +187,9 @@ No `.env` file needed. Pass the key via `--api-key` or export the variable above
 
 ```
 --goal TEXT            Research question for the agent loop
---llm {mock,ollama,openrouter,lmstudio}
---model TEXT           Model name for the chosen LLM backend
---api-key TEXT         API key (or set OPENROUTER_API_KEY)
---base-url TEXT        Override LLM server URL
+--model TEXT           Model name for the OpenAI-compatible backend
+--api-key TEXT         API key (or set LLM_API_KEY)
+--base-url TEXT        Base URL for the /v1/chat/completions endpoint
 --embedding-model TEXT Qwen3-VL-Embedding model id or local path
 --reranker-model TEXT  Qwen3-VL-Reranker model id or local path
 --no-reranker          Disable reranker for faster runs
