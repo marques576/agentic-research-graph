@@ -54,8 +54,8 @@ To use your own data, drop any supported files into `data/` (or sub-folders — 
 
 ```bash
 # Clone and install (requires Python 3.11+, uv)
-git clone https://github.com/your-username/data_lastchance
-cd data_lastchance
+git clone https://github.com/marques576/agentic-research-graph
+cd agentic-research-graph
 uv sync                  # installs into .venv automatically
 
 # Drop your files into data/ then run (recommended)
