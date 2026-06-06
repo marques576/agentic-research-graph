@@ -187,8 +187,6 @@ class ResearchController:
     confidence_threshold : float
         Confidence level at which the best hypothesis is considered confirmed
         and the loop exits early.  Default 0.75.
-    embedding_model_id : str
-        Qwen3-VL-Embedding model id.
     reranker_model_id : str | None
         Qwen3-VL-Reranker model id.  None disables re-ranking.
     embedding_kwargs : dict
@@ -207,7 +205,6 @@ class ResearchController:
         data_dir: str | Path = "data",
         max_iterations: int = 3,
         confidence_threshold: float = 0.75,
-        embedding_model_id: str = "Qwen/Qwen3-VL-Embedding-2B",
         reranker_model_id: str | None = "Qwen/Qwen3-VL-Reranker-2B",
         embedding_kwargs: dict | None = None,
         ingestion_kwargs: dict | None = None,
@@ -218,7 +215,6 @@ class ResearchController:
         self.data_dir = Path(data_dir)
         self.max_iterations = max_iterations
         self.confidence_threshold = confidence_threshold
-        self.embedding_model_id = embedding_model_id
         self.reranker_model_id = reranker_model_id
         self.embedding_kwargs: dict = embedding_kwargs or {}
         self.ingestion_kwargs: dict = ingestion_kwargs or {}
@@ -362,7 +358,6 @@ class ResearchController:
 
         pipeline = MultimodalIngestionPipeline(
             data_dir=self.data_dir,
-            embedding_model_id=self.embedding_model_id,
             embedding_kwargs=self.embedding_kwargs,
             verbose=True,
             **self.ingestion_kwargs,
@@ -438,7 +433,6 @@ class ResearchController:
             documents=documents,
             pipeline=self._pipeline,
             top_k=5,
-            embedding_model_id=self.embedding_model_id,
             embedding_kwargs=self.embedding_kwargs,
         ))
 

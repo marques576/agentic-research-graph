@@ -6,14 +6,8 @@ Usage
     # Mock LLM (default — no API key, smoke-test only):
     python main.py
 
-    # Choose embedding model size (all run fully locally):
-    python main.py --embedding-model Qwen/Qwen3-VL-Embedding-2B   # default
-
     # Disable the reranker (faster, lower precision):
     python main.py --no-reranker
-
-    # Whisper model size for audio/video transcription:
-    python main.py --whisper-size base   # tiny | base | small | medium | large
 
     # Any OpenAI-compatible LLM (use --base-url to enable):
     python main.py --base-url https://api.openai.com/v1 --model gpt-4o --api-key sk-...
@@ -79,16 +73,6 @@ def build_arg_parser() -> argparse.ArgumentParser:
         help="Research goal / question for the agent.",
     )
 
-    # ---- Embedding model ----
-    parser.add_argument(
-        "--embedding-model",
-        default="Qwen/Qwen3-VL-Embedding-2B",
-        help=(
-            "Qwen3-VL-Embedding model for local multimodal embeddings.\n"
-            "  Qwen/Qwen3-VL-Embedding-2B  – ~5 GB VRAM (default)"
-        ),
-    )
-
     # ---- Reranker model ----
     parser.add_argument(
         "--reranker-model",
@@ -104,14 +88,6 @@ def build_arg_parser() -> argparse.ArgumentParser:
         action="store_true",
         default=False,
         help="Disable the reranker (faster, lower precision).",
-    )
-
-    # ---- Audio / video transcription ----
-    parser.add_argument(
-        "--whisper-size",
-        default="turbo",
-        choices=["tiny", "base", "small", "medium", "large", "turbo"],
-        help="Whisper model size for audio/video transcription (default: turbo).",
     )
 
     # ---- LLM backend ----
@@ -191,11 +167,8 @@ def main() -> None:
         llm=llm,
         data_dir=data_dir,
         max_iterations=args.max_iterations,
-        embedding_model_id=args.embedding_model,
         reranker_model_id=None if args.no_reranker else args.reranker_model,
-        ingestion_kwargs={
-            "whisper_model_size": args.whisper_size,
-        },
+        ingestion_kwargs={},
         helper_prompt=args.goal,
         ontology_path=getattr(args, "ontology_path", None),
     )

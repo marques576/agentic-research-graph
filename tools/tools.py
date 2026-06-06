@@ -84,10 +84,9 @@ class MultimodalVectorSearchTool(Tool):
 
     Models (local, no API key)
     --------------------------
-    ``Qwen/Qwen3-VL-Embedding-2B``  —  ~5 GB VRAM, CPU-offloadable (default)
+    ``Qwen/Qwen3-VL-Embedding-2B``  —  ~5 GB VRAM, CPU-offloadable (hardcoded)
 
     On first use, weights download to ``~/.cache/huggingface``.
-    You can also pass an absolute local directory path as ``embedding_model_id``.
 
     Parameters
     ----------
@@ -98,8 +97,6 @@ class MultimodalVectorSearchTool(Tool):
         Passing this avoids re-embedding at search time.
     top_k : int
         Number of results to return per query.
-    embedding_model_id : str
-        Local path or HuggingFace id for Qwen3-VL-Embedding.
     query_instruction : str | None
         Task instruction prepended to every query embedding.
         Improves recall by ~1–5 %.  Pass ``None`` to disable.
@@ -125,13 +122,11 @@ class MultimodalVectorSearchTool(Tool):
         documents: dict[str, str],
         pipeline: Any = None,
         top_k: int = 5,
-        embedding_model_id: str = "Qwen/Qwen3-VL-Embedding-2B",
         query_instruction: str | None = None,
         embedding_kwargs: dict[str, Any] | None = None,
     ) -> None:
         self.documents        = documents
         self.top_k            = top_k
-        self.embedding_model_id = embedding_model_id
         self.query_instruction  = query_instruction or self._DEFAULT_QUERY_INSTRUCTION
         self.embedding_kwargs   = embedding_kwargs or {}
 
@@ -165,7 +160,7 @@ class MultimodalVectorSearchTool(Tool):
             import faiss       # type: ignore[import]
             import numpy as np # type: ignore[import]
 
-            embedder = get_embedder(self.embedding_model_id, **self.embedding_kwargs)
+            embedder = get_embedder(**self.embedding_kwargs)
 
             embed_inputs: list[dict[str, Any]] = []
             for doc_id, text in self.documents.items():
@@ -239,7 +234,7 @@ class MultimodalVectorSearchTool(Tool):
             import faiss       # type: ignore[import]
             import numpy as np # type: ignore[import]
 
-            embedder = get_embedder(self.embedding_model_id, **self.embedding_kwargs)
+            embedder = get_embedder(**self.embedding_kwargs)
 
             # Embed the text query with a task instruction
             query_input = [{

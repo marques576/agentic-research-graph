@@ -109,17 +109,12 @@ _reranker_instance: Any = None   # Qwen3VLReranker
 _whisper_instance:  Any = None
 
 
-def get_embedder(model_id: str = "Qwen/Qwen3-VL-Embedding-2B", **kwargs: Any) -> Any:
+def get_embedder(**kwargs: Any) -> Any:
     """
     Return a cached Qwen3VLEmbedder instance (loaded once per process).
 
     Parameters
     ----------
-    model_id : str
-        HuggingFace model id OR local directory path.
-        Examples:
-          "Qwen/Qwen3-VL-Embedding-2B"   – auto-downloads to HF cache
-          "/local/path/Qwen3-VL-Embedding-2B"  – fully offline
     **kwargs :
         Forwarded to Qwen3VLEmbedder (e.g. torch_dtype, attn_implementation).
     """
@@ -132,8 +127,7 @@ def get_embedder(model_id: str = "Qwen/Qwen3-VL-Embedding-2B", **kwargs: Any) ->
         import importlib.util
         from huggingface_hub import hf_hub_download  # type: ignore[import]
 
-        # model_id may be a local path already containing the script
-        scripts_local = Path(model_id) / "scripts" / "qwen3_vl_embedding.py"
+        model_id = "Qwen/Qwen3-VL-Embedding-2B"
         if scripts_local.exists():
             script_path = str(scripts_local)
         else:
@@ -185,12 +179,12 @@ def get_reranker(model_id: str = "Qwen/Qwen3-VL-Reranker-2B", **kwargs: Any) -> 
     return _reranker_instance
 
 
-def get_whisper(model_size: str = "base") -> Any:
-    """Return a cached Whisper model."""
+def get_whisper() -> Any:
+    """Return a cached Whisper model (hardcoded to tiny)."""
     global _whisper_instance
     if _whisper_instance is None:
         import whisper  # type: ignore[import]
-        _whisper_instance = whisper.load_model(model_size)
+        _whisper_instance = whisper.load_model("tiny")
     return _whisper_instance
 
 
@@ -355,10 +349,10 @@ def _extract_xlsx(path: Path) -> str:
         return f"[XLSX: {path.name} — {exc}]"
 
 
-def _transcribe_audio(path: Path, whisper_model_size: str = "base") -> str:
+def _transcribe_audio(path: Path) -> str:
     """Transcribe audio with Whisper (runs locally, no API)."""
     try:
-        model = get_whisper(whisper_model_size)
+        model = get_whisper()
         result = model.transcribe(str(path), fp16=False)
         transcript = result.get("text", "").strip()
         return f"[AUDIO TRANSCRIPT]\n{transcript}" if transcript else ""
@@ -457,7 +451,6 @@ class MultimodalIngestionPipeline:
 
         pipeline = MultimodalIngestionPipeline(
             data_dir="my_data/",
-            embedding_model_id="Qwen/Qwen3-VL-Embedding-2B",
         )
         documents = pipeline.run()
         faiss_index = pipeline.build_faiss_index()
@@ -473,13 +466,10 @@ class MultimodalIngestionPipeline:
         Also scan sub-folders.
     min_text_length : int
         Skip files that produce fewer than this many characters of text.
-    embedding_model_id : str
-        Local path or HuggingFace id for Qwen3-VL-Embedding.
     embedding_kwargs : dict
         Extra kwargs forwarded to Qwen3VLEmbedder (e.g. ``torch_dtype``,
         ``attn_implementation``).
-    whisper_model_size : str
-        Whisper checkpoint size for audio transcription.
+
     video_fps : float
         Frame sampling rate for video inputs.
     video_max_frames : int
@@ -503,9 +493,7 @@ class MultimodalIngestionPipeline:
         self,
         data_dir: str | Path,
         min_text_length: int = 30,
-        embedding_model_id: str = "Qwen/Qwen3-VL-Embedding-2B",
         embedding_kwargs: dict[str, Any] | None = None,
-        whisper_model_size: str = "base",
         video_fps: float = 1.0,
         video_max_frames: int = 64,
         embed_instruction: str | None = None,
@@ -517,9 +505,7 @@ class MultimodalIngestionPipeline:
     ) -> None:
         self.data_dir = Path(data_dir)
         self.min_text_length = min_text_length
-        self.embedding_model_id = embedding_model_id
         self.embedding_kwargs: dict[str, Any] = embedding_kwargs or {}
-        self.whisper_model_size = whisper_model_size
         self.video_fps = video_fps
         self.video_max_frames = video_max_frames
         self.embed_instruction = embed_instruction or self._DEFAULT_INSTRUCTION
@@ -736,7 +722,7 @@ class MultimodalIngestionPipeline:
             return "", items
 
         if modality == "audio":
-            text = _transcribe_audio(path, self.whisper_model_size)
+            text = _transcribe_audio(path)
             items = [
                 _embed_input_for_text(chunk, instr)
                 for chunk in _chunk_text(text, self.chunk_size, self.chunk_overlap)
@@ -771,12 +757,11 @@ class MultimodalIngestionPipeline:
             return
 
         self._log(
-            f"\nEmbedding {len(self.embed_inputs)} items with "
-            f"'{self.embedding_model_id}' (local) …"
+            f"\nEmbedding {len(self.embed_inputs)} items with Qwen3-VL-Embedding-2B (local) …"
         )
 
         try:
-            embedder = get_embedder(self.embedding_model_id, **self.embedding_kwargs)
+            embedder = get_embedder(**self.embedding_kwargs)
             import torch  # type: ignore[import]
 
             # Process in batches to avoid OOM
