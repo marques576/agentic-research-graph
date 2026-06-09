@@ -1,0 +1,127 @@
+{
+  "__init__.py": {
+    "mtime": 1781001160.2024443,
+    "ast_hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "semantic_hash": "d41d8cd98f00b204e9800998ecf8427e"
+  },
+  "agents/__init__.py": {
+    "mtime": 1781001160.2024443,
+    "ast_hash": "b2aa2acb45f973d4e7ee9238a30f6cc0",
+    "semantic_hash": "b2aa2acb45f973d4e7ee9238a30f6cc0"
+  },
+  "agents/base_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "7095b520ad274c068c30a5113b0f227b",
+    "semantic_hash": "7095b520ad274c068c30a5113b0f227b"
+  },
+  "agents/graph_explorer_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "61b95eeee49dffc17240954ebd58f2a1",
+    "semantic_hash": "61b95eeee49dffc17240954ebd58f2a1"
+  },
+  "agents/hypothesis_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "200d9392b56b92382afd2e39767f7b37",
+    "semantic_hash": "200d9392b56b92382afd2e39767f7b37"
+  },
+  "agents/ontology_learner_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "61a9593be08e8290455107abd0c09400",
+    "semantic_hash": "61a9593be08e8290455107abd0c09400"
+  },
+  "agents/planner_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "311bb1df38617937d9fbe8d2571d7ace",
+    "semantic_hash": "311bb1df38617937d9fbe8d2571d7ace"
+  },
+  "agents/research_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "8e75861ff05808377eb5da97db5c4cc5",
+    "semantic_hash": "8e75861ff05808377eb5da97db5c4cc5"
+  },
+  "agents/validation_agent.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "cc81c6a10503423db7183fa435d79e61",
+    "semantic_hash": "cc81c6a10503423db7183fa435d79e61"
+  },
+  "controller/__init__.py": {
+    "mtime": 1781001160.206217,
+    "ast_hash": "9fceac67363c9562b6ec909e0fe63b81",
+    "semantic_hash": "9fceac67363c9562b6ec909e0fe63b81"
+  },
+  "controller/research_controller.py": {
+    "mtime": 1781001160.209421,
+    "ast_hash": "64700a82be888161bd11db2ba2dd549a",
+    "semantic_hash": "64700a82be888161bd11db2ba2dd549a"
+  },
+  "graph/__init__.py": {
+    "mtime": 1781001160.2348633,
+    "ast_hash": "c82f1cf1f806eada0bcae25d4998af91",
+    "semantic_hash": "c82f1cf1f806eada0bcae25d4998af91"
+  },
+  "graph/knowledge_graph.py": {
+    "mtime": 1781001160.2400763,
+    "ast_hash": "865bee853973f3e5cade8cf4d8945752",
+    "semantic_hash": "865bee853973f3e5cade8cf4d8945752"
+  },
+  "ingestion/__init__.py": {
+    "mtime": 1781001160.2400763,
+    "ast_hash": "45b157bc9a54a6f7f0542b3b604d828c",
+    "semantic_hash": "45b157bc9a54a6f7f0542b3b604d828c"
+  },
+  "ingestion/multimodal_ingestion.py": {
+    "mtime": 1781001160.2408733,
+    "ast_hash": "740c425bb4396d862a97b4566792a3f8",
+    "semantic_hash": "740c425bb4396d862a97b4566792a3f8"
+  },
+  "llm/__init__.py": {
+    "mtime": 1781001160.2408733,
+    "ast_hash": "59a9def2c4a3aaeb07260bd7210614f9",
+    "semantic_hash": "59a9def2c4a3aaeb07260bd7210614f9"
+  },
+  "llm/llm.py": {
+    "mtime": 1781001160.2424355,
+    "ast_hash": "decb6cd67f9985f1f9196cb38e534709",
+    "semantic_hash": "decb6cd67f9985f1f9196cb38e534709"
+  },
+  "main.py": {
+    "mtime": 1781001160.2424355,
+    "ast_hash": "e7626419179e01a98839ee840740f7c8",
+    "semantic_hash": "e7626419179e01a98839ee840740f7c8"
+  },
+  "memory/__init__.py": {
+    "mtime": 1781001160.2424355,
+    "ast_hash": "aa3fc25d6bb10f37625b9f5cb969ea1a",
+    "semantic_hash": "aa3fc25d6bb10f37625b9f5cb969ea1a"
+  },
+  "memory/memory.py": {
+    "mtime": 1781001160.2440002,
+    "ast_hash": "3117918e9279330a48e6ae71042cdc36",
+    "semantic_hash": "3117918e9279330a48e6ae71042cdc36"
+  },
+  "ontology/__init__.py": {
+    "mtime": 1781001160.2440002,
+    "ast_hash": "4c0eeb12713ad401f67a2b8785bbda20",
+    "semantic_hash": "4c0eeb12713ad401f67a2b8785bbda20"
+  },
+  "ontology/ontology.py": {
+    "mtime": 1781001160.244762,
+    "ast_hash": "ed464636d79baab1fa637c95d2d3d09b",
+    "semantic_hash": "ed464636d79baab1fa637c95d2d3d09b"
+  },
+  "skills/graphify/install.sh": {
+    "mtime": 1781001670.0558252,
+    "ast_hash": "d7c8bc58a5f1299ccd0a23f0b7f5e6c8",
+    "semantic_hash": "d7c8bc58a5f1299ccd0a23f0b7f5e6c8"
+  },
+  "tools/__init__.py": {
+    "mtime": 1781001160.244762,
+    "ast_hash": "9654bd241d3d796e08f87d5d2f3bec47",
+    "semantic_hash": "9654bd241d3d796e08f87d5d2f3bec47"
+  },
+  "tools/tools.py": {
+    "mtime": 1781001160.2456863,
+    "ast_hash": "61a854287e51df4a49c300b40ec148d4",
+    "semantic_hash": "61a854287e51df4a49c300b40ec148d4"
+  }
+}

@@ -27,11 +27,11 @@ env/
 .uv/
 
 # Runtime outputs
-graph.html
-graph.json
-ontology.json
+/graph.html
+/graph.json
+/ontology.json
 *.graphml
-report.json
+/report.json
 
 # OS
 .DS_Store
@@ -62,3 +62,7 @@ data/*.mp4
 data/*.avi
 data/*.mov
 data/*.mkv
+
+# graphify output directory (cache is regenerated on re-run)
+graphify-out/cache/
+graphify-out/.graphify_labels.json
