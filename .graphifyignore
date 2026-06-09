@@ -1,0 +1,14 @@
+# Files excluded from graphify indexation only (git tracking unaffected)
+data/
+goodGraph.png
+goodgraph.png
+
+# graphify library submodule — not part of this project's code
+lib/graphify/
+
+# Doc files — exclude from graphify scan to keep code-only (no API key needed)
+*.md
+*.yml
+*.yaml
+*.toml
+LICENSE

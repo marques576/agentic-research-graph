@@ -7,7 +7,6 @@ dependencies = [
     "numpy>=1.24",
     "requests>=2.31",
     "networkx>=3.3",
-
     # ── Qwen3-VL-Embedding & Qwen3-VL-Reranker (local inference, no API key) ─
     # transformers 4.57.x is required — 5.x removed check_model_inputs used by
     # the Qwen3-VL scripts.
@@ -18,33 +17,31 @@ dependencies = [
     "accelerate>=1.12.0",             # device_map="auto" / multi-GPU offloading
     "qwen-vl-utils>=0.0.14",          # vision preprocessing for Qwen3-VL models
     "scipy>=1.9",                     # used by Qwen3VLReranker scoring head
-
     # ── Vector index ──────────────────────────────────────────────────────────
     "faiss-cpu>=1.7.4",               # swap for faiss-gpu if you have CUDA
-
     # ── PDF text extraction + page rendering ─────────────────────────────────
     "pdfminer.six>=20221105",         # high-fidelity PDF text (primary)
     "pypdf>=3.0",                     # fast fallback PDF text extraction
     "pymupdf>=1.23",                  # per-page text + PNG rendering (required for hybrid PDF)
-
     # ── Image handling ────────────────────────────────────────────────────────
     "pillow>=9.0",                    # PIL Image, used by qwen-vl-utils and ingestion
-
     # ── Audio / video transcription ───────────────────────────────────────────
     # ffmpeg must be on PATH for non-WAV audio (brew install ffmpeg / apt install ffmpeg)
     "openai-whisper>=20231117",       # local Whisper ASR — no API key needed
-
     # ── Office document extraction ────────────────────────────────────────────
     "python-docx>=0.8.11",            # .docx
     "openpyxl>=3.1",                  # .xlsx
     "python-pptx>=0.6.21",            # .pptx
-
     # ── NLP ───────────────────────────────────────────────────────────────────
     # After install run: python -m spacy download en_core_web_sm
     "spacy>=3.7",
-
+    # ── graphify knowledge graph pipeline ──────────────────────────────────────
+    # vendored at lib/graphify/ — https://github.com/safishamsi/graphify
+    # PyPI name is graphifyy while the graphify name is being reclaimed
+    "graphifyy>=0.1",
     # ── Optional extras ───────────────────────────────────────────────────────
     "rich>=13.0",
+    "openai>=2.41.0",
 ]
 
 [project.optional-dependencies]
