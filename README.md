@@ -1,256 +1,183 @@
-# data_lastchance
+# Ontology Harness
 
-**Drop any files. Discover hidden relationships. No API key required for embeddings.**
+**An open, local-first, agent-native ontology substrate.**
 
-A local, multimodal, agentic knowledge-graph builder. Point it at a folder of PDFs, MP3s, videos, images, or Office docs and it will ingest everything, learn the domain ontology, run a multi-agent reasoning loop, and produce an interactive knowledge graph — all on your own hardware.
-
-![Knowledge Graph output](goodGraph.png)
+A local daemon that owns a typed object/link graph, exposes it over MCP so any agent can read and write structured knowledge with provenance and an audit trail — without needing to know or care how the graph is stored.
 
 ---
 
-## What it does
+## What it is
 
-Most RAG pipelines stop at retrieval. This one keeps going.
+Ontology Harness is not a knowledge graph builder. It is the substrate *under* one.
 
-1. **Ingests everything** — PDF, plain text, images, audio (Whisper transcription), video, `.docx`/`.xlsx`/`.pptx`. No pre-processing scripts, just drop files into `data/` (sub-folders included).
-2. **Learns the ontology** — before any reasoning starts, an `OntologyLearnerAgent` reads the corpus and infers entity types and relation categories specific to *your* domain.
-3. **Runs an agent loop** — a `ResearchController` orchestrates four agents in a blackboard pattern until confidence exceeds a threshold:
-   - `PlannerAgent` — decomposes the goal into an ordered task list
-   - `ResearchAgent` — semantic search → NER → extracts entities and relations
-   - `GraphExplorerAgent` — walks the NetworkX graph for multi-hop inferred edges
-   - `HypothesisAgent` + `ValidationAgent` — generates and scores relationship hypotheses; exits when `confidence ≥ threshold`
-4. **Exports an interactive graph** — every run writes `graph.html` (Cytoscape.js, dark-mode, hover tooltips, colour-coded by entity type).
-5. **Interactive query prompt** — after the run you can ask free-form questions about the graph (`neighbors <entity>`, `path <A> <B>`, natural language).
+Most ontology + LLM systems share the same gap: anything can mutate the graph with no validation, no record of *why* a write happened, and no way to trace data back to its source. When you close the process, the graph vanishes.
 
----
+Ontology Harness fixes that:
 
-## Demo data
+- **Persistent** — SQLite-backed. Data survives process restarts. Open `ontology.db` with `sqlite3` or any SQL tool.
+- **Governed writes** — every mutation goes through declared Action Types with input validation and atomic transactions. No ad-hoc graph edits.
+- **Provenance** — every object, link, and property value is traceable to the source (file, agent, conversation) and timestamp that produced it.
+- **Agent-native** — MCP is the primary interface. Connect via Claude Code, Claude Desktop, or any MCP client and agents can read/write the ontology as naturally as they call tools.
+- **Local-first** — runs entirely on your machine. No server, no cloud sync, no auth beyond filesystem permissions.
 
-The repo ships with ready-to-run corpora:
-
-**`data/`** — a fictional murder-mystery document set (great for testing hidden-relationship discovery):
-
-```
-data/
-├── 01_police_incident_report.txt
-├── 02_witness_statement_chen.txt
-├── 03_harrington_letter_to_lawyer.txt
-├── 04_financial_audit_q3_1987.txt
-├── 05_alpine_consulting_registry.txt
-├── 06_medtech_internal_memo.txt
-├── 07_lab_accident_report_april87.txt
-├── 08_price_phone_records.csv
-├── 09_westbrook_chronicle_obituary.txt
-├── 10_toxicology_report.txt
-├── 11_chen_private_diary.txt
-└── 12_alpine_consulting_bank_statement.json
-```
-
-To use your own data, drop any supported files into `data/` (or sub-folders — they are scanned recursively).
+This is the "opencode for ontologies" — open-source, local-first, governed writes, agent-native by construction rather than a database agents happen to call.
 
 ---
 
 ## Quick start
 
+### 1. Install
+
 ```bash
-# Clone and install (requires Python 3.11+, uv)
 git clone https://github.com/marques576/agentic-research-graph
 cd agentic-research-graph
-uv sync                  # installs into .venv automatically
-
-# Drop your files into data/ then run (recommended)
-uv run python main.py \
-  --base-url https://openrouter.ai/api/v1 \
-  --model minimax/minimax-m2.5 \
-  --api-key sk-or-...
+uv sync
 ```
 
-Get an OpenRouter API key at [openrouter.ai/keys](https://openrouter.ai/keys) — MiniMax M2.5 is one of the most capable models available there and is very cost-efficient for long-context reasoning over document corpora.
+### 2. Create a database
 
 ```bash
-# Custom research goal
-uv run python main.py \
-  --base-url https://openrouter.ai/api/v1 \
-  --model minimax/minimax-m2.5 \
-  --api-key sk-or-... \
-  --goal "Who killed Victor Harrington and why?" \
-  --max-iterations 4
-
-# Load a saved run and query it interactively
-uv run python main.py --load graph.json
-
-# Single non-interactive query against a saved run
-uv run python main.py --load graph.json --query "Who killed Victor Harrington and why?"
-
-# Smoke test with no API key (mock LLM, instant, no network)
-uv run python main.py
+uv run python -m cli.main init --db my_ontology.db
 ```
 
-Open `graph.html` in any browser after the run to explore the graph interactively.
+### 3. Connect an agent via MCP
 
----
+Add to your Claude Desktop or Claude Code MCP config:
 
-## Architecture
-
-```
-CLI (main.py)
-    └── ResearchController
-            ├── Phase 0 (once)  OntologyLearnerAgent   learns entity types + relation triples
-            ├── Phase 1 (once)  PlannerAgent            produces ordered task list
-            ├── Phase 2 (loop)  ResearchAgent           retrieval → NER → relationship extraction
-            │                   GraphExplorerAgent      multi-hop path discovery; writes inferred edges
-            │                   HypothesisAgent         proposes relationship hypotheses every N steps
-            │                   ValidationAgent         scores hypotheses; stops loop when confident
-            └── Phase 3         graph.html + graph.json + interactive query prompt
+```json
+{
+  "mcpServers": {
+    "ontology-harness": {
+      "command": "uv",
+      "args": ["run", "python", "-m", "mcp_server.server", "--db", "my_ontology.db"]
+    }
+  }
+}
 ```
 
-**Blackboard pattern** — all agents share a single `AgentMemory` instance. No message passing, no queues.
+The agent can now call these tools:
 
-**Confidence-gated termination** — the loop exits when `best_hypothesis.confidence ≥ threshold` (default `0.75`). Pass `--threshold` to tune.
-
-**Fallback everywhere** — FAISS missing? TF-IDF. spaCy missing? Regex NER. Qwen3-VL missing? keyword search. The system always runs.
-
----
-
-## Embeddings and reranking (fully local, no API key)
-
-The LLM is used only for reasoning. Embeddings always run locally using **Qwen3-VL-Embedding** — images and videos are embedded as pixels, not text, so visual content is semantically searchable.
-
-```bash
-# Default: 2B model (~5 GB VRAM, CPU-offloadable)
-uv run python main.py --embedding-model Qwen/Qwen3-VL-Embedding-2B
-
-# Disable reranker for speed
-uv run python main.py --no-reranker
-```
-
-Weights are downloaded once to `~/.cache/huggingface`.
-
----
-
-## Supported file types
-
-| Category | Extensions |
+| Tool | Purpose |
 |---|---|
-| Text | `.txt` `.md` `.rst` `.csv` `.json` `.xml` `.html` |
-| PDF | `.pdf` |
-| Images | `.jpg` `.jpeg` `.png` `.gif` `.bmp` `.tiff` `.webp` |
-| Audio | `.mp3` `.wav` `.ogg` `.flac` `.m4a` |
-| Video | `.mp4` `.avi` `.mov` `.mkv` `.webm` |
-| Office | `.docx` `.pptx` `.xlsx` |
+| `get_schema` | List all Object Types and Link Types |
+| `define_object_type` | Create a new Object Type (e.g. Person, Organization) |
+| `define_link_type` | Create a new Link Type between Object Types |
+| `upsert_object` | Create or update an object instance |
+| `upsert_link` | Create a link between two objects |
+| `delete_object` / `delete_link` | Soft-delete with provenance |
+| `get_object` | Get an object with its full provenance history |
+| `find_objects` | Find objects by type and property filters |
+| `get_neighbors` | Get objects linked to a given object |
+| `get_provenance` | Full write history for any object or link |
 
-Audio and video are transcribed locally with **OpenAI Whisper** (no API, runs offline).
+### 4. Define a schema and add data (via agent)
 
-```bash
-# Choose Whisper model size (tiny → large → turbo)
-uv run python main.py --whisper-size turbo
-```
+Tell the agent something like:
 
----
+> Define an object type "Person" with properties: name (string, required) and age (number). Define a link type "KNOWS" from Person to Person. Then create two Person objects "Alice" and "Bob" and link them with KNOWS.
 
-## LLM backends
+The agent will call `define_object_type`, `define_link_type`, `upsert_object`, and `upsert_link` through MCP — all validated, all tracked.
 
-| Backend | Flag | Notes |
-|---|---|---|
-| **OpenAI-compatible** | `--base-url` | Any `/v1/chat/completions` endpoint — OpenAI, OpenRouter, Groq, LM Studio, Ollama, OpenCode Go, etc. |
-| Mock | *(default)* | Deterministic, no network, good for smoke testing |
+### 5. Inspect from the CLI
 
 ```bash
-# OpenCode Go
-uv run python main.py --base-url https://opencode.ai/zen/go/v1 --model deepseek-v4-pro --api-key oc-...
-
-# OpenRouter
-uv run python main.py --base-url https://openrouter.ai/api/v1 --model openai/gpt-4o --api-key sk-or-...
-
-# Or export the key so you don't have to type it every time
-export LLM_API_KEY=sk-or-...
-uv run python main.py --base-url https://openrouter.ai/api/v1 --model openai/gpt-4o
-
-# Local servers (no key needed)
-uv run python main.py --base-url http://localhost:1234/v1 --model qwen/qwen3-30b-a3b    # LM Studio
-uv run python main.py --base-url http://localhost:11434/v1 --model llama3                 # Ollama
+uv run python -m cli.main --db my_ontology.db inspect
+uv run python -m cli.main --db my_ontology.db export --pretty
+uv run python -m cli.main --db my_ontology.db validate
 ```
+
+Every object and link you see has a non-null, queryable provenance record.
 
 ---
 
-## Environment variables
+## Run the reference pipeline
 
-| Variable | Purpose |
-|---|---|
-| `LLM_API_KEY` | API key for the OpenAI-compatible LLM backend |
+The repository includes a reference client that demonstrates the full extraction pipeline:
 
-No `.env` file needed. Pass the key via `--api-key` or export the variable above.
+```bash
+# Mock LLM (deterministic, no API key needed — instant)
+uv run python examples/research_pipeline/run.py
 
----
+# With a real LLM
+uv run python examples/research_pipeline/run.py \
+  --base-url https://opencode.ai/zen/go/v1 \
+  --model deepseek-v4-pro \
+  --api-key oc-...
 
-## CLI reference
-
+# Inspect results
+uv run python -m cli.main --db examples/research_pipeline/research.db inspect
 ```
---goal TEXT            Research question for the agent loop
---model TEXT           Model name for the OpenAI-compatible backend
---api-key TEXT         API key (or set LLM_API_KEY)
---base-url TEXT        Base URL for the /v1/chat/completions endpoint
---embedding-model TEXT Qwen3-VL-Embedding model id or local path
---reranker-model TEXT  Qwen3-VL-Reranker model id or local path
---no-reranker          Disable reranker for faster runs
---whisper-size         Whisper model size: tiny|base|small|medium|large|turbo
---max-iterations INT   Agent loop iteration count (default: 3)
---load PATH            Load a saved report and skip the run
---query TEXT           Single non-interactive query against a loaded report
---ontology-path PATH   Save/load the learned ontology JSON
-```
+
+The pipeline reads text files from `data/`, extracts entities and relationships, and writes them through the same Action Types and provenance system. See `examples/research_pipeline/run.py` for details.
+
+The original five-agent blackboard research pipeline (`agents/`, `controller/`, `llm/`, `tools/`, `memory/`, `ingestion/`, `graph/`, `ontology/`) remains available at the repo root as-is. It illustrates the multi-agent pattern that originally motivated the substrate.
 
 ---
 
 ## Project layout
 
 ```
-/                                      ← repo root
-├── main.py                            CLI entry point
-├── pyproject.toml                     dependencies (uv sync)
-├── uv.lock
+/
+├── core/                     ← Ontology Harness core library
+│   ├── schema.py              Object Type / Link Type / property definitions + validation
+│   ├── store.py                SQLite-backed persistence layer
+│   ├── actions.py              Action Type registry — the only write path
+│   ├── provenance.py           Provenance record shape
+│   └── query.py                Read API: get, find, neighbors, traverse
 │
-├── agents/
-│   ├── base_agent.py                  abstract base class
-│   ├── planner_agent.py
-│   ├── research_agent.py
-│   ├── hypothesis_agent.py
-│   ├── validation_agent.py
-│   ├── graph_explorer_agent.py
-│   └── ontology_learner_agent.py
+├── mcp_server/
+│   └── server.py              MCP server exposing core/ as 11 tools
 │
-├── controller/
-│   └── research_controller.py        orchestrates the full agent loop
+├── cli/
+│   └── main.py                Thin CLI: init, inspect, export, validate
 │
-├── graph/
-│   └── knowledge_graph.py            NetworkX DiGraph + GraphML export
+├── examples/
+│   └── research_pipeline/     Reference client: LLM extraction → governed writes
 │
-├── ontology/
-│   └── ontology.py                   DomainOntology dataclass
-│
-├── llm/
-│   └── llm.py                        LLM abstraction (Mock/Ollama/OpenRouter/LMStudio)
-│
-├── tools/
-│   └── tools.py                      7 tools + ToolRegistry
-│
-├── memory/
-│   └── memory.py                     AgentMemory blackboard + dataclasses
-│
-├── ingestion/
-│   └── multimodal_ingestion.py
-│
-└── data/                             ← drop your files here
-    └── ...
+├── tests/                     pytest test suite (109 tests)
+├── data/                      Text files for the reference pipeline
+└── pyproject.toml
 ```
 
-`graph.html`, `graph.json`, and `ontology.json` are written to the working directory at runtime.
+---
+
+## Data model
+
+### Object Type
+A declared type of entity (e.g. `Person`, `Organization`, `Document`).
+Has a name, an ordered list of properties (name, data type, required), and a description.
+Data types: `string | number | boolean | datetime | reference`.
+
+### Link Type
+A declared relationship between two Object Types (e.g. `EMPLOYED_BY: Person -> Organization`).
+Has a name, source/target types, cardinality (`one_to_one | one_to_many | many_to_one | many_to_many`), and a description.
+
+### Object (instance)
+An entity instance with a UUID, object type, validated properties, timestamps, and provenance.
+
+### Link (instance)
+A relationship instance with a UUID, link type, source/target object IDs, optional properties, and provenance.
+
+### Provenance
+Every object and link carries a provenance record: source, agent, action type, timestamp, and optional confidence. Nothing enters the graph without it.
+
+### Action Types
+The governance layer. Six built-in types: `create_object_type`, `create_link_type`, `upsert_object`, `upsert_link`, `delete_object`, `delete_link`. All writes go through an Action Type — there is no other write path.
+
+---
+
+## Design decisions
+
+- **SQLite, not a graph DB** — survives restarts, supports concurrent readers, inspectable with zero setup. A dedicated graph DB is out of scope until query performance on tens of millions of edges becomes the bottleneck.
+- **MCP is the primary interface** — this is what makes it agent-native by construction. An HTTP layer can wrap the same core library later but is not required.
+- **JSON blob for properties columns** — schema flexibility, with validation happening in Python at the Action Type layer. Object Types are user-defined and dynamic, so SQL constraints can't cover the validation surface.
+- **Soft deletes** — objects and links are marked deleted, never hard-deleted. Provenance history is preserved.
+- **In-process core usage for the example client** — `examples/research_pipeline/` calls `core/` directly rather than going through MCP, since it runs in the same process. An external agent would use the MCP server.
 
 ---
 
 ## Requirements
 
 - Python 3.11+
-- [`uv`](https://github.com/astral-sh/uv) (or `pip install` manually from `pyproject.toml`)
-- `ffmpeg` on `PATH` for non-WAV audio (`brew install ffmpeg` / `apt install ffmpeg`)
-- GPU optional — everything runs on CPU with automatic offloading
+- [`uv`](https://github.com/astral-sh/uv) for dependency management
+- No GPU, no external services, no API keys required for the core

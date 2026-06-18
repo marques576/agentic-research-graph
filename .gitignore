@@ -32,6 +32,7 @@ graph.json
 ontology.json
 *.graphml
 report.json
+*.db
 
 # OS
 .DS_Store
